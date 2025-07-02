@@ -40,3 +40,5 @@ $result = $conn->query($sql);
   <?php endif; ?>
 
 <?php include("../partials/footer.php"); ?>
+
+<button id="exportCsvBtn" class="btn btn-sm btn-outline-secondary mb-3">Export to CSV</button>
