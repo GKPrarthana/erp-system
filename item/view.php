@@ -11,7 +11,17 @@ $result = $conn->query($sql);
   <h2>Item List</h2>
   <a href="add.php" class="btn btn-success mb-3">+ Add New Item</a>
 
-  <table class="table table-bordered table-striped">
+  <div class="mb-3">
+    <input
+      type="text"
+      id="searchInput"
+      class="form-control"
+      placeholder="Search table..."
+      autocomplete="off"
+    />
+  </div>
+
+  <table class="table table-bordered table-striped table-hover">
     <thead class="table-dark">
       <tr>
         <th>ID</th>
