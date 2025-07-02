@@ -74,4 +74,16 @@ $latestInvoice = $conn->query("SELECT MAX(date) AS latest FROM invoice")->fetch_
   <a href="reports/item_report.php" class="btn btn-outline-dark">Item Report</a>
 </div>
 
+<!-- Analytics Section -->
+<h4 class="mb-3">Analytics</h4>
+<div class="d-flex flex-wrap gap-3">
+  <a href="reports/dashboard_charts.php" class="btn btn-outline-dark">Dashboard Charts</a>
+</div>
+
+<!-- Advanced Analytics Section -->
+<h4 class="mb-3">Advanced Analytics</h4>
+<div class="d-flex flex-wrap gap-3">
+  <a href="reports/advanced_dashboard.php" class="btn btn-outline-dark">Advanced Dashboard</a>
+</div>
+
 <?php include("partials/footer.php"); ?>
