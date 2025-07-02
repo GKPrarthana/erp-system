@@ -1,12 +1,17 @@
 <?php
 include("../config/db.php");
+include("../partials/header.php");
 
 // Fetch all items
-$sql = "SELECT * FROM item ORDER BY id DESC";
+$sql = "
+  SELECT i.*, ic.category, isc.sub_category
+  FROM item i
+  JOIN item_category    ic  ON i.item_category    = ic.id
+  JOIN item_subcategory isc ON i.item_subcategory = isc.id
+  ORDER BY i.id DESC
+";
 $result = $conn->query($sql);
 ?>
-
-<?php include("../partials/header.php"); ?>
 
   <h2>Item List</h2>
   <a href="add.php" class="btn btn-success mb-3">+ Add New Item</a>
@@ -41,8 +46,8 @@ $result = $conn->query($sql);
             <td><?= $row['id'] ?></td>
             <td><?= $row['item_code'] ?></td>
             <td><?= $row['item_name'] ?></td>
-            <td><?= $row['item_category'] ?></td>
-            <td><?= $row['item_subcategory'] ?></td>
+            <td><?= $row['category'] ?></td>
+            <td><?= $row['sub_category'] ?></td>
             <td><?= $row['quantity'] ?></td>
             <td><?= $row['unit_price'] ?></td>
             <td>

@@ -4,6 +4,9 @@ include("../config/db.php");
 $errors = [];
 $success = "";
 
+/* --- fetch active districts once --- */
+$districts = $conn->query("SELECT id, district FROM district WHERE active='yes'");
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $first_name = trim($_POST['first_name']);
@@ -72,10 +75,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label>Contact Number</label>
       <input type="text" name="contact_no" class="form-control" maxlength="10" required>
     </div>
+    
     <div class="mb-2">
       <label>District</label>
-      <input type="text" name="district" class="form-control" required>
+      <select name="district" class="form-select" required>
+        <option value="">-- Select District --</option>
+        <?php while ($d = $districts->fetch_assoc()): ?>
+          <option value="<?= $d['id'] ?>"><?= $d['district'] ?></option>
+        <?php endwhile; ?>
+      </select>
     </div>
+
     <button type="submit" class="btn btn-primary">Add Customer</button>
     <a href="view.php" class="btn btn-secondary">View Customers</a>
   </form>

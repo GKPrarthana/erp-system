@@ -1,8 +1,9 @@
 <?php
 include("../config/db.php");
+include("../partials/header.php");
 
-$errors = [];
 $data = [];
+$errors = [];
 $start_date = $_POST['start_date'] ?? '';
 $end_date = $_POST['end_date'] ?? '';
 
@@ -10,14 +11,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$start_date || !$end_date) {
         $errors[] = "Both start and end dates are required.";
     } else {
-        $sql = "SELECT i.invoice_no, i.date, c.first_name, c.last_name,
-                       it.item_code, it.item_name, it.item_category, im.unit_price
-                FROM invoice i
-                JOIN customer c ON i.customer = c.id
-                JOIN invoice_master im ON i.invoice_no = im.invoice_no
-                JOIN item it ON im.item_id = it.id
-                WHERE i.date BETWEEN ? AND ?
-                ORDER BY i.date DESC";
+      $sql = "
+        SELECT
+          i.invoice_no,
+          i.date,
+          CONCAT(c.first_name,' ',c.last_name) AS customer_name,
+          it.item_code,
+          it.item_name,
+          ic.category AS item_category,
+          im.unit_price
+        FROM invoice i
+        JOIN customer       c  ON i.customer       = c.id
+        JOIN invoice_master im ON i.invoice_no     = im.invoice_no
+        JOIN item           it ON im.item_id       = it.id
+        JOIN item_category  ic ON it.item_category = ic.id
+        WHERE i.date BETWEEN ? AND ?
+        ORDER BY i.date DESC
+      ";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $start_date, $end_date);
@@ -30,8 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
-<?php include("../partials/header.php"); ?>
 
   <h2>Invoice Item Report</h2>
 
@@ -74,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <tr>
             <td><?= htmlspecialchars($row['invoice_no']) ?></td>
             <td><?= htmlspecialchars($row['date']) ?></td>
-            <td><?= htmlspecialchars($row['first_name'] . ' ' . $row['last_name']) ?></td>
+            <td><?= htmlspecialchars($row['customer_name']) ?></td>
             <td><?= htmlspecialchars($row['item_code']) ?></td>
             <td><?= htmlspecialchars($row['item_name']) ?></td>
             <td><?= htmlspecialchars($row['item_category']) ?></td>

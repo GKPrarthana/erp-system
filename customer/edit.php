@@ -17,6 +17,9 @@ if (!$customer) {
     die("Customer not found.");
 }
 
+/* --- fetch active districts once --- */
+$districts = $conn->query("SELECT id, district FROM district WHERE active='yes'");
+
 // Update on form submit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
@@ -94,7 +97,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="mb-2">
       <label>District</label>
-      <input type="text" name="district" class="form-control" value="<?= $customer['district'] ?>" required>
+      <select name="district" class="form-select" required>
+        <option value="">-- Select District --</option>
+        <?php while ($d = $districts->fetch_assoc()): ?>
+          <option value="<?= $d['id'] ?>" <?= ($customer['district'] == $d['id'] ? "selected" : "") ?>><?= $d['district'] ?></option>
+        <?php endwhile; ?>
+      </select>
     </div>
     <button type="submit" class="btn btn-primary">Update</button>
     <a href="view.php" class="btn btn-secondary">Back to List</a>

@@ -3,7 +3,12 @@ include("../config/db.php");
 include("../partials/header.php");
 
 // Fetch all customers
-$sql = "SELECT * FROM customer ORDER BY id DESC";
+$sql = "
+  SELECT c.*, d.district
+  FROM customer c
+  JOIN district d ON c.district = d.id
+  ORDER BY c.id DESC
+";
 $result = $conn->query($sql);
 ?>
 

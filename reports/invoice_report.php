@@ -12,11 +12,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if ($start_date > $end_date) {
         $errors[] = "Start date cannot be after end date.";
     } else {
-        $sql = "SELECT i.invoice_no, i.date, c.first_name, c.last_name, c.district, i.item_count, i.amount 
-                FROM invoice i
-                LEFT JOIN customer c ON i.customer = c.id
-                WHERE i.date BETWEEN ? AND ?
-                ORDER BY i.date DESC";
+      $sql = "
+        SELECT
+          i.invoice_no,
+          i.date,
+          CONCAT(c.first_name,' ',c.last_name) AS customer_name,
+          d.district                            AS customer_district,
+          i.item_count,
+          i.amount
+        FROM invoice i
+        JOIN customer c ON i.customer = c.id
+        JOIN district d ON c.district = d.id
+        WHERE i.date BETWEEN ? AND ?
+        ORDER BY i.date DESC
+      ";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $start_date, $end_date);
@@ -72,8 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <tr>
             <td><?= htmlspecialchars($inv['invoice_no']) ?></td>
             <td><?= htmlspecialchars($inv['date']) ?></td>
-            <td><?= htmlspecialchars($inv['first_name'] . ' ' . $inv['last_name']) ?></td>
-            <td><?= htmlspecialchars($inv['district']) ?></td>
+            <td><?= htmlspecialchars($inv['customer_name']) ?></td>
+            <td><?= htmlspecialchars($inv['customer_district']) ?></td>
             <td><?= htmlspecialchars($inv['item_count']) ?></td>
             <td><?= htmlspecialchars($inv['amount']) ?></td>
           </tr>

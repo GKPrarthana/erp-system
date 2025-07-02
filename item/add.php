@@ -4,9 +4,8 @@ include("../config/db.php");
 $errors = [];
 $success = "";
 
-// Fetch item categories
-$category_result = $conn->query("SELECT * FROM item_category");
-$subcategory_result = $conn->query("SELECT * FROM item_subcategory");
+$categories = $conn->query("SELECT id, category FROM item_category");
+$subcats    = $conn->query("SELECT id, sub_category FROM item_subcategory");
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -27,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (count($errors) === 0) {
         $sql = "INSERT INTO item (item_code, item_name, item_category, item_subcategory, quantity, unit_price)
-                VALUES (?, ?, ?, ?, ?, ?)";
+                VALUES (?, ?, (SELECT id FROM item_category WHERE category = ?), (SELECT id FROM item_subcategory WHERE sub_category = ?), ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssssss", $item_code, $item_name, $item_category, $item_subcategory, $quantity, $unit_price);
 
@@ -67,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label>Item Category</label>
       <select name="item_category" class="form-select" required>
         <option value="">-- Select Category --</option>
-        <?php while ($row = $category_result->fetch_assoc()): ?>
+        <?php while ($row = $categories->fetch_assoc()): ?>
           <option value="<?= $row['category'] ?>"><?= $row['category'] ?></option>
         <?php endwhile; ?>
       </select>
@@ -76,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label>Item Subcategory</label>
       <select name="item_subcategory" class="form-select" required>
         <option value="">-- Select Subcategory --</option>
-        <?php while ($row = $subcategory_result->fetch_assoc()): ?>
+        <?php while ($row = $subcats->fetch_assoc()): ?>
           <option value="<?= $row['sub_category'] ?>"><?= $row['sub_category'] ?></option>
         <?php endwhile; ?>
       </select>

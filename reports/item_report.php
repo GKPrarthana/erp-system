@@ -2,10 +2,17 @@
 include("../config/db.php");
 
 // Group items by name (distinct), with total quantity
-$sql = "SELECT item_name, item_category, item_subcategory, SUM(quantity) AS total_quantity
-        FROM item
-        GROUP BY item_name, item_category, item_subcategory
-        ORDER BY item_name ASC";
+$sql = "SELECT
+  it.item_name,
+  ic.category,
+  isc.sub_category,
+  SUM(it.quantity) AS total_quantity
+FROM item it
+JOIN item_category    ic  ON it.item_category    = ic.id
+JOIN item_subcategory isc ON it.item_subcategory = isc.id
+GROUP BY it.item_name, ic.category, isc.sub_category
+ORDER BY it.item_name;
+";
 
 $result = $conn->query($sql);
 ?>
@@ -28,8 +35,8 @@ $result = $conn->query($sql);
         <?php while ($row = $result->fetch_assoc()): ?>
           <tr>
             <td><?= htmlspecialchars($row['item_name']) ?></td>
-            <td><?= htmlspecialchars($row['item_category']) ?></td>
-            <td><?= htmlspecialchars($row['item_subcategory']) ?></td>
+            <td><?= htmlspecialchars($row['category']) ?></td>
+            <td><?= htmlspecialchars($row['sub_category']) ?></td>
             <td><?= htmlspecialchars($row['total_quantity']) ?></td>
           </tr>
         <?php endwhile; ?>

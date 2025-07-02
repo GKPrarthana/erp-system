@@ -5,9 +5,8 @@ $errors = [];
 $success = "";
 $id = $_GET['id'] ?? 0;
 
-// Fetch categories and subcategories for dropdowns
-$category_result = $conn->query("SELECT * FROM item_category");
-$subcategory_result = $conn->query("SELECT * FROM item_subcategory");
+$categories = $conn->query("SELECT id, category FROM item_category");
+$subcats    = $conn->query("SELECT id, sub_category FROM item_subcategory");
 
 // Fetch existing item
 $stmt = $conn->prepare("SELECT * FROM item WHERE id = ?");
@@ -85,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label>Item Category</label>
       <select name="item_category" class="form-select" required>
         <option value="">-- Select Category --</option>
-        <?php while ($row = $category_result->fetch_assoc()): ?>
+        <?php while ($row = $categories->fetch_assoc()): ?>
           <option value="<?= $row['category'] ?>" <?= ($item['item_category'] == $row['category']) ? 'selected' : '' ?>>
             <?= $row['category'] ?>
           </option>
@@ -96,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label>Item Subcategory</label>
       <select name="item_subcategory" class="form-select" required>
         <option value="">-- Select Subcategory --</option>
-        <?php while ($row = $subcategory_result->fetch_assoc()): ?>
+        <?php while ($row = $subcats->fetch_assoc()): ?>
           <option value="<?= $row['sub_category'] ?>" <?= ($item['item_subcategory'] == $row['sub_category']) ? 'selected' : '' ?>>
             <?= $row['sub_category'] ?>
           </option>
