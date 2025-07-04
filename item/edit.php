@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include("../partials/header.php"); ?>
 
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2><i class="bi bi-pencil-square me-2"></i>Edit Item</h2>
+    <h2>Edit Item</h2>
     <div>
       <a href="../index.php" class="btn btn-outline-primary me-2">
         <i class="bi bi-house-door me-1"></i>Home
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <select name="item_category" class="form-select" required>
         <option value="">-- Select Category --</option>
         <?php while ($row = $categories->fetch_assoc()): ?>
-          <option value="<?= $row['category'] ?>" <?= ($item['item_category'] == $row['category']) ? 'selected' : '' ?>>
+          <option value="<?= $row['id'] ?>" <?= ($item['item_category'] == $row['id']) ? 'selected' : '' ?>>
             <?= $row['category'] ?>
           </option>
         <?php endwhile; ?>
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <select name="item_subcategory" class="form-select" required>
         <option value="">-- Select Subcategory --</option>
         <?php while ($row = $subcats->fetch_assoc()): ?>
-          <option value="<?= $row['sub_category'] ?>" <?= ($item['item_subcategory'] == $row['sub_category']) ? 'selected' : '' ?>>
+          <option value="<?= $row['id'] ?>" <?= ($item['item_subcategory'] == $row['id']) ? 'selected' : '' ?>>
             <?= $row['sub_category'] ?>
           </option>
         <?php endwhile; ?>

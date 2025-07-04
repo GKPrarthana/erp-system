@@ -14,7 +14,7 @@ $result = $conn->query($sql);
 ?>
 
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2><i class="bi bi-box-seam me-2"></i>Item List</h2>
+    <h2>Item List</h2>
     <div>
       <a href="../index.php" class="btn btn-outline-primary me-2">
         <i class="bi bi-house-door me-1"></i>Home

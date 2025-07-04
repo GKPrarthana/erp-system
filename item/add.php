@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (count($errors) === 0) {
         $sql = "INSERT INTO item (item_code, item_name, item_category, item_subcategory, quantity, unit_price)
-                VALUES (?, ?, (SELECT id FROM item_category WHERE category = ?), (SELECT id FROM item_subcategory WHERE sub_category = ?), ?, ?)";
+                VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssssss", $item_code, $item_name, $item_category, $item_subcategory, $quantity, $unit_price);
 
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include("../partials/header.php"); ?>
 
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2><i class="bi bi-plus-square me-2"></i>Add Item</h2>
+    <h2>Add Item</h2>
     <div>
       <a href="../index.php" class="btn btn-outline-primary me-2">
         <i class="bi bi-house-door me-1"></i>Home
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <select name="item_category" class="form-select" required>
         <option value="">-- Select Category --</option>
         <?php while ($row = $categories->fetch_assoc()): ?>
-          <option value="<?= $row['category'] ?>"><?= $row['category'] ?></option>
+          <option value="<?= $row['id'] ?>"><?= $row['category'] ?></option>
         <?php endwhile; ?>
       </select>
     </div>
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <select name="item_subcategory" class="form-select" required>
         <option value="">-- Select Subcategory --</option>
         <?php while ($row = $subcats->fetch_assoc()): ?>
-          <option value="<?= $row['sub_category'] ?>"><?= $row['sub_category'] ?></option>
+          <option value="<?= $row['id'] ?>"><?= $row['sub_category'] ?></option>
         <?php endwhile; ?>
       </select>
     </div>
