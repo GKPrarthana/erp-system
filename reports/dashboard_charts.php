@@ -28,6 +28,24 @@ while ($row = $res->fetch_assoc()) {
 
 <h2 class="mb-4">ERP Analytics Dashboard</h2>
 
+<style>
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    height: 250px;
+  }
+}
+</style>
+
 <div class="row gy-4">
   <div class="col-md-6">
     <div class="card shadow-sm">
@@ -35,7 +53,9 @@ while ($row = $res->fetch_assoc()) {
         Item Count by Category
       </div>
       <div class="card-body">
-        <canvas id="pieChart"></canvas>
+        <div class="chart-container">
+          <canvas id="pieChart"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -46,7 +66,9 @@ while ($row = $res->fetch_assoc()) {
         Sales Per Day
       </div>
       <div class="card-body">
-        <canvas id="barChart"></canvas>
+        <div class="chart-container">
+          <canvas id="barChart"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -57,7 +79,9 @@ while ($row = $res->fetch_assoc()) {
         Top 5 Most Sold Items
       </div>
       <div class="card-body">
-        <canvas id="doughnutChart"></canvas>
+        <div class="chart-container">
+          <canvas id="doughnutChart"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -112,6 +136,18 @@ new Chart(pieCtx, {
   data: pieData,
   options: {
     responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          padding: 10,
+          font: {
+            size: 12
+          }
+        }
+      }
+    }
   }
 });
 
@@ -120,8 +156,32 @@ new Chart(barCtx, {
   data: barData,
   options: {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
-      y: { beginAtZero: true }
+      y: { 
+        beginAtZero: true,
+        ticks: {
+          font: {
+            size: 11
+          }
+        }
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 11
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            size: 12
+          }
+        }
+      }
     }
   }
 });
@@ -131,6 +191,18 @@ new Chart(doughnutCtx, {
   data: doughnutData,
   options: {
     responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          padding: 10,
+          font: {
+            size: 12
+          }
+        }
+      }
+    }
   }
 });
 </script>

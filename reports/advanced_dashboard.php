@@ -76,6 +76,24 @@ while ($row = $res->fetch_assoc()) $subCategoryQty[] = $row;
 <div class="container my-4">
   <h2>Advanced ERP Analytics Dashboard</h2>
 
+  <style>
+  .chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .chart-container {
+      height: 250px;
+    }
+  }
+  </style>
+
   <!-- Date Range Filter -->
   <form method="get" class="row g-3 mb-4 align-items-center">
     <div class="col-auto">
@@ -100,7 +118,9 @@ while ($row = $res->fetch_assoc()) $subCategoryQty[] = $row;
           <button class="btn btn-sm btn-outline-secondary export-btn" data-chart="monthlySalesChart">Export PNG</button>
         </div>
         <div class="card-body">
-          <canvas id="monthlySalesChart"></canvas>
+          <div class="chart-container">
+            <canvas id="monthlySalesChart"></canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -112,7 +132,9 @@ while ($row = $res->fetch_assoc()) $subCategoryQty[] = $row;
           <button class="btn btn-sm btn-outline-secondary export-btn" data-chart="topDistrictsChart">Export PNG</button>
         </div>
         <div class="card-body">
-          <canvas id="topDistrictsChart"></canvas>
+          <div class="chart-container">
+            <canvas id="topDistrictsChart"></canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -124,7 +146,9 @@ while ($row = $res->fetch_assoc()) $subCategoryQty[] = $row;
           <button class="btn btn-sm btn-outline-secondary export-btn" data-chart="categoryRevenueChart">Export PNG</button>
         </div>
         <div class="card-body">
-          <canvas id="categoryRevenueChart"></canvas>
+          <div class="chart-container">
+            <canvas id="categoryRevenueChart"></canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -136,7 +160,9 @@ while ($row = $res->fetch_assoc()) $subCategoryQty[] = $row;
           <button class="btn btn-sm btn-outline-secondary export-btn" data-chart="avgInvoiceChart">Export PNG</button>
         </div>
         <div class="card-body">
-          <canvas id="avgInvoiceChart"></canvas>
+          <div class="chart-container">
+            <canvas id="avgInvoiceChart"></canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -148,7 +174,9 @@ while ($row = $res->fetch_assoc()) $subCategoryQty[] = $row;
           <button class="btn btn-sm btn-outline-secondary export-btn" data-chart="subCategoryQtyChart">Export PNG</button>
         </div>
         <div class="card-body">
-          <canvas id="subCategoryQtyChart"></canvas>
+          <div class="chart-container">
+            <canvas id="subCategoryQtyChart"></canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -180,7 +208,7 @@ const subCategoryQtyLabels = <?= json_encode(array_column($subCategoryQty, 'sub_
 const subCategoryQtyData = <?= json_encode(array_column($subCategoryQty, 'total_quantity')) ?>;
 
 // Chart configs
-const monthlySalesChart = new Chart(
+window.monthlySalesChart = new Chart(
   document.getElementById('monthlySalesChart'),
   {
     type: 'line',
@@ -194,11 +222,39 @@ const monthlySalesChart = new Chart(
         tension: 0.1
       }]
     },
-    options: { responsive: true }
+    options: { 
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 12
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          ticks: {
+            font: {
+              size: 11
+            }
+          }
+        },
+        x: {
+          ticks: {
+            font: {
+              size: 11
+            }
+          }
+        }
+      }
+    }
   }
 );
 
-const topDistrictsChart = new Chart(
+window.topDistrictsChart = new Chart(
   document.getElementById('topDistrictsChart'),
   {
     type: 'bar',
@@ -210,11 +266,40 @@ const topDistrictsChart = new Chart(
         backgroundColor: '#28a745'
       }]
     },
-    options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    options: { 
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: { 
+        y: { 
+          beginAtZero: true,
+          ticks: {
+            font: {
+              size: 11
+            }
+          }
+        },
+        x: {
+          ticks: {
+            font: {
+              size: 11
+            }
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 12
+            }
+          }
+        }
+      }
+    }
   }
 );
 
-const categoryRevenueChart = new Chart(
+window.categoryRevenueChart = new Chart(
   document.getElementById('categoryRevenueChart'),
   {
     type: 'doughnut',
@@ -226,11 +311,25 @@ const categoryRevenueChart = new Chart(
         backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#6f42c1']
       }]
     },
-    options: { responsive: true }
+    options: { 
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            padding: 10,
+            font: {
+              size: 12
+            }
+          }
+        }
+      }
+    }
   }
 );
 
-const avgInvoiceChart = new Chart(
+window.avgInvoiceChart = new Chart(
   document.getElementById('avgInvoiceChart'),
   {
     type: 'line',
@@ -245,11 +344,39 @@ const avgInvoiceChart = new Chart(
         tension: 0.1
       }]
     },
-    options: { responsive: true }
+    options: { 
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 12
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          ticks: {
+            font: {
+              size: 11
+            }
+          }
+        },
+        x: {
+          ticks: {
+            font: {
+              size: 11
+            }
+          }
+        }
+      }
+    }
   }
 );
 
-const subCategoryQtyChart = new Chart(
+window.subCategoryQtyChart = new Chart(
   document.getElementById('subCategoryQtyChart'),
   {
     type: 'bar',
@@ -261,7 +388,37 @@ const subCategoryQtyChart = new Chart(
         backgroundColor: '#fd7e14'
       }]
     },
-    options: { responsive: true, indexAxis: 'y', scales: { x: { beginAtZero: true } } }
+    options: { 
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y', 
+      scales: { 
+        x: { 
+          beginAtZero: true,
+          ticks: {
+            font: {
+              size: 11
+            }
+          }
+        },
+        y: {
+          ticks: {
+            font: {
+              size: 11
+            }
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 12
+            }
+          }
+        }
+      }
+    }
   }
 );
 
@@ -270,12 +427,60 @@ document.querySelectorAll('.export-btn').forEach(button => {
   button.addEventListener('click', () => {
     const chartId = button.dataset.chart;
     const chartInstance = window[chartId];
-    if (chartInstance) {
-      const url = chartInstance.toBase64Image();
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${chartId}.png`;
-      a.click();
+    
+    if (chartInstance && typeof chartInstance.toBase64Image === 'function') {
+      try {
+        // Temporarily disable responsive to get better quality export
+        const originalResponsive = chartInstance.options.responsive;
+        chartInstance.options.responsive = false;
+        chartInstance.resize();
+        
+        // Generate the image
+        const url = chartInstance.toBase64Image('image/png', 1.0);
+        
+        // Create download link
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${chartId}_${new Date().toISOString().split('T')[0]}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        
+        // Restore responsive setting
+        chartInstance.options.responsive = originalResponsive;
+        chartInstance.resize();
+        
+        // Show success message
+        button.textContent = 'Exported!';
+        button.classList.remove('btn-outline-secondary');
+        button.classList.add('btn-success');
+        setTimeout(() => {
+          button.textContent = 'Export PNG';
+          button.classList.remove('btn-success');
+          button.classList.add('btn-outline-secondary');
+        }, 2000);
+        
+      } catch (error) {
+        console.error('Export failed:', error);
+        button.textContent = 'Export Failed';
+        button.classList.remove('btn-outline-secondary');
+        button.classList.add('btn-danger');
+        setTimeout(() => {
+          button.textContent = 'Export PNG';
+          button.classList.remove('btn-danger');
+          button.classList.add('btn-outline-secondary');
+        }, 2000);
+      }
+    } else {
+      console.error('Chart instance not found:', chartId);
+      button.textContent = 'Chart Not Found';
+      button.classList.remove('btn-outline-secondary');
+      button.classList.add('btn-danger');
+      setTimeout(() => {
+        button.textContent = 'Export PNG';
+        button.classList.remove('btn-danger');
+        button.classList.add('btn-outline-secondary');
+      }, 2000);
     }
   });
 });
@@ -323,6 +528,42 @@ body.dark-mode .form-control {
   background-color: #2b2b2b;
   color: #eee;
   border-color: #555;
+}
+
+/* Export button styles */
+.export-btn {
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.export-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.export-btn.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+.export-btn.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+/* Chart container improvements */
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  background: white;
+  border-radius: 4px;
+}
+
+body.dark-mode .chart-container {
+  background: #1e1e1e;
 }
 </style>
 
