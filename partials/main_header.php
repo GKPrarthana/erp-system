@@ -12,14 +12,14 @@
   />
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body class="container mt-4">
 
 <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg mb-4">
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="../index.php">
+    <a class="navbar-brand fw-bold" href="index.php">
       ERP System
     </a>
     
@@ -30,7 +30,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" href="../index.php">
+          <a class="nav-link active" href="index.php">
             Home
           </a>
         </li>
@@ -39,10 +39,10 @@
             Management
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="../customer/view.php">
+            <li><a class="dropdown-item" href="customer/view.php">
               Customers
             </a></li>
-            <li><a class="dropdown-item" href="../item/view.php">
+            <li><a class="dropdown-item" href="item/view.php">
               Items
             </a></li>
           </ul>
@@ -52,13 +52,13 @@
             Reports
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="../reports/invoice_report.php">
+            <li><a class="dropdown-item" href="reports/invoice_report.php">
               Invoice Report
             </a></li>
-            <li><a class="dropdown-item" href="../reports/invoice_item_report.php">
+            <li><a class="dropdown-item" href="reports/invoice_item_report.php">
               Invoice Item Report
             </a></li>
-            <li><a class="dropdown-item" href="../reports/item_report.php">
+            <li><a class="dropdown-item" href="reports/item_report.php">
               Item Report
             </a></li>
           </ul>
@@ -68,10 +68,10 @@
             Analytics
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="../reports/dashboard_charts.php">
+            <li><a class="dropdown-item" href="reports/dashboard_charts.php">
               Dashboard Charts
             </a></li>
-            <li><a class="dropdown-item" href="../reports/advanced_dashboard.php">
+            <li><a class="dropdown-item" href="reports/advanced_dashboard.php">
               Advanced Dashboard
             </a></li>
           </ul>
@@ -80,3 +80,5 @@
     </div>
   </div>
 </nav>
+</body>
+</html> 

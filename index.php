@@ -31,7 +31,7 @@ $latestInvoice = $conn->query("SELECT MAX(date) AS latest FROM invoice")->fetch_
 </style>
 
 <div class="container py-4">
-  <h2 class="mb-4 fw-bold text-center"><i class="bi bi-speedometer2 me-2"></i>ERP System Dashboard</h2>
+  <h2 class="mb-4 fw-bold text-center"></i>ERP System Dashboard</h2>
 
   <div class="row g-4 mb-5">
     <!-- Customers -->
@@ -85,7 +85,7 @@ $latestInvoice = $conn->query("SELECT MAX(date) AS latest FROM invoice")->fetch_
 
   <!-- Management -->
   <div class="dashboard-section" data-aos="fade-up">
-    <h4><i class="bi bi-gear-wide-connected me-2"></i>Management</h4>
+    <h4></i>Management</h4>
     <div class="d-flex flex-wrap gap-3">
       <a href="customer/view.php" class="btn btn-outline-success">
         <i class="bi bi-people-fill me-1"></i> Customers
@@ -98,7 +98,7 @@ $latestInvoice = $conn->query("SELECT MAX(date) AS latest FROM invoice")->fetch_
 
   <!-- Reports -->
   <div class="dashboard-section" data-aos="fade-up">
-    <h4><i class="bi bi-graph-up me-2"></i>Reports</h4>
+    <h4></i>Reports</h4>
     <div class="d-flex flex-wrap gap-3">
       <a href="reports/invoice_report.php" class="btn btn-outline-dark">
         <i class="bi bi-file-earmark-text me-1"></i> Invoice Report
@@ -114,7 +114,7 @@ $latestInvoice = $conn->query("SELECT MAX(date) AS latest FROM invoice")->fetch_
 
   <!-- Analytics -->
   <div class="dashboard-section" data-aos="fade-up">
-    <h4><i class="bi bi-bar-chart-line me-2"></i>Analytics</h4>
+    <h4></i>Analytics</h4>
     <div class="d-flex flex-wrap gap-3">
       <a href="reports/dashboard_charts.php" class="btn btn-outline-dark">
         <i class="bi bi-pie-chart me-1"></i> Dashboard Charts
@@ -124,7 +124,7 @@ $latestInvoice = $conn->query("SELECT MAX(date) AS latest FROM invoice")->fetch_
 
   <!-- Advanced -->
   <div class="dashboard-section" data-aos="fade-up">
-    <h4><i class="bi bi-lightning-charge me-2"></i>Advanced Analytics</h4>
+    <h4></i>Advanced Analytics</h4>
     <div class="d-flex flex-wrap gap-3">
       <a href="reports/advanced_dashboard.php" class="btn btn-outline-dark">
         <i class="bi bi-bar-chart-steps me-1"></i> Advanced Dashboard

@@ -41,7 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include("../partials/header.php"); ?>
 
-  <h2>Invoice Report</h2>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="bi bi-file-earmark-text me-2"></i>Invoice Report</h2>
+    <div>
+      <a href="../index.php" class="btn btn-outline-primary">
+        <i class="bi bi-house-door me-1"></i>Home
+      </a>
+    </div>
+  </div>
 
   <form method="POST" class="row g-3 mb-4">
     <div class="col-auto">
@@ -53,8 +60,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input type="date" name="end_date" value="<?= htmlspecialchars($end_date) ?>" class="form-control" required>
     </div>
     <div class="col-auto align-self-end">
-      <button type="submit" class="btn btn-primary">Search</button>
-      <a href="invoice_report.php" class="btn btn-secondary">Reset</a>
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-search me-1"></i>Search
+      </button>
+      <a href="invoice_report.php" class="btn btn-secondary">
+        <i class="bi bi-arrow-clockwise me-1"></i>Reset
+      </a>
     </div>
   </form>
 

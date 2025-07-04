@@ -59,7 +59,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include("../partials/header.php"); ?>
 
-  <h2>Edit Item</h2>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="bi bi-pencil-square me-2"></i>Edit Item</h2>
+    <div>
+      <a href="../index.php" class="btn btn-outline-primary me-2">
+        <i class="bi bi-house-door me-1"></i>Home
+      </a>
+      <a href="view.php" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left me-1"></i>Back to List
+      </a>
+    </div>
+  </div>
 
   <?php if ($success): ?>
     <div class="alert alert-success"><?= $success ?></div>
@@ -110,8 +120,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label>Unit Price</label>
       <input type="number" step="0.01" name="unit_price" class="form-control" value="<?= htmlspecialchars($item['unit_price']) ?>" required>
     </div>
-    <button type="submit" class="btn btn-primary">Update Item</button>
-    <a href="view.php" class="btn btn-secondary">Back to List</a>
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-check-circle me-1"></i>Update Item
+      </button>
+      <a href="view.php" class="btn btn-secondary">
+        <i class="bi bi-arrow-left me-1"></i>Back to List
+      </a>
+      <a href="../index.php" class="btn btn-outline-primary">
+        <i class="bi bi-house-door me-1"></i>Home
+      </a>
+    </div>
   </form>
 
 <?php include("../partials/footer.php"); ?>

@@ -19,7 +19,14 @@ $result = $conn->query($sql);
 
 <?php include("../partials/header.php"); ?>
 
-  <h2>Item Report</h2>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="bi bi-box2 me-2"></i>Item Report</h2>
+    <div>
+      <a href="../index.php" class="btn btn-outline-primary">
+        <i class="bi bi-house-door me-1"></i>Home
+      </a>
+    </div>
+  </div>
 
   <?php if ($result && $result->num_rows > 0): ?>
     <table class="table table-bordered table-striped">

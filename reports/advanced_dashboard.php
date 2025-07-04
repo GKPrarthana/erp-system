@@ -74,7 +74,14 @@ while ($row = $res->fetch_assoc()) $subCategoryQty[] = $row;
 ?>
 
 <div class="container my-4">
-  <h2>Advanced ERP Analytics Dashboard</h2>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-bar-chart-steps me-2"></i>Advanced ERP Analytics Dashboard</h2>
+    <div>
+      <a href="../index.php" class="btn btn-outline-primary">
+        <i class="bi bi-house-door me-1"></i>Home
+      </a>
+    </div>
+  </div>
 
   <style>
   .chart-container {
@@ -105,8 +112,12 @@ while ($row = $res->fetch_assoc()) $subCategoryQty[] = $row;
       <input type="date" id="end_date" name="end_date" class="form-control" value="<?= htmlspecialchars($endDate) ?>">
     </div>
     <div class="col-auto mt-4">
-      <button type="submit" class="btn btn-primary">Filter</button>
-      <button type="button" id="resetDates" class="btn btn-secondary">Reset</button>
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-funnel me-1"></i>Filter
+      </button>
+      <button type="button" id="resetDates" class="btn btn-secondary">
+        <i class="bi bi-arrow-clockwise me-1"></i>Reset
+      </button>
     </div>
   </form>
 

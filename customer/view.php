@@ -12,8 +12,17 @@ $sql = "
 $result = $conn->query($sql);
 ?>
 
-  <h2>Customer List</h2>
-  <a href="add.php" class="btn btn-success mb-3">+ Add New Customer</a>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="bi bi-people-fill me-2"></i>Customer List</h2>
+    <div>
+      <a href="../index.php" class="btn btn-outline-primary me-2">
+        <i class="bi bi-house-door me-1"></i>Home
+      </a>
+      <a href="add.php" class="btn btn-success">
+        <i class="bi bi-plus-circle me-1"></i>Add New Customer
+      </a>
+    </div>
+  </div>
 
   <div class="mb-3">
     <input
