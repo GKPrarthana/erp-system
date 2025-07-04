@@ -30,9 +30,6 @@ Comprehensive ERP system built with PHP, MySQL, and Bootstrap for customer, inve
 4. **Place Project** - Copy project to `C:\xampp\htdocs\erp-system\`
 5. **Access System** - Visit `http://localhost/erp-system/`
 
-## Database Export
-Run `export_database.bat` to create `erp_system_database.sql`
-
 ## File Structure
 ```
 erp-system/
