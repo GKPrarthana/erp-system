@@ -1,4 +1,4 @@
-# ERP System - Csquare Technologies Assignment
+# ERP System
 
 ## Project Overview
 Comprehensive ERP system built with PHP, MySQL, and Bootstrap for customer, inventory, and invoice management.
